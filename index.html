@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday 🎉</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h1>🎂 Happy Birthday! 🎂</h1>
+    <p class="subtitle">Wishing you a day full of smiles</p>
+
+    <div class="button-panel">
+      <button id="balloonBtn">🎈 Balloons</button>
+      <button id="confettiBtn">🎊 Confetti</button>
+      <button id="cakeBtn">🍰 Cake</button>
+      <button id="musicBtn">🎵 Music</button>
+      <button id="messageBtn">💌 Surprise</button>
+    </div>
+
+    <div id="cake" class="cake hidden">🍰</div>
+    <div id="message" class="message hidden">
+      You are amazing. Have the best birthday ever 💖
+    </div>
+  </div>
+
+  <audio id="birthdaySong"
+    src="https://cdn.pixabay.com/audio/2022/03/15/audio_5fdf9d8e9e.mp3">
+  </audio>
+
+  <script src="main.js"></script>
+</body>
+</html>
