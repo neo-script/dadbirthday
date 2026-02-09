@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd6e8, #c3f0ff);
+  font-family: 'Patrick Hand SC', cursive;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 2.5rem 3rem;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  max-width: 420px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.button-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffb3d9, #b3ecff);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+.cake {
+  font-size: 5rem;
+  margin-top: 1rem;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  to { transform: translateY(-10px); }
+}
+
+.message {
+  margin-top: 1.2rem;
+  font-size: 1.3rem;
+  background: #fff0f6;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Floating balloons */
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  font-size: 3rem;
+  animation: floatUp 6s linear forwards;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
