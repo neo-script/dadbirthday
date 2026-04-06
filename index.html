@@ -3,39 +3,314 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday 🎉</title>
+  <title>Balloon Letter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Georgia, serif;
+      background: linear-gradient(180deg, #fff7fb 0%, #ffe9f2 45%, #ffd8e8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-  <link rel="stylesheet" href="style.css">
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(130, 70, 110, 0.18);
+      padding: 36px 28px;
+      max-width: 520px;
+      width: min(92vw, 520px);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #8d4366;
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #6d4a58;
+    }
+
+    .magic-button {
+      border: none;
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, #ff77aa, #ff5e8f);
+      box-shadow: 0 12px 25px rgba(255, 94, 143, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .magic-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 30px rgba(255, 94, 143, 0.42);
+    }
+
+    .magic-button:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .letter-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(90, 43, 65, 0.18);
+      z-index: 5;
+    }
+
+    .letter-overlay.show {
+      display: flex;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .letter {
+      width: min(92vw, 760px);
+      max-height: 82vh;
+      overflow: auto;
+      background: #fffdf8;
+      border-radius: 24px;
+      padding: 34px 28px;
+      box-shadow: 0 26px 70px rgba(90, 43, 65, 0.25);
+      text-align: left;
+      position: relative;
+      border: 1px solid #f0d9c9;
+      animation: popIn 0.45s ease;
+    }
+
+    .letter::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1.5px dashed #e8c6d4;
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .letter-content {
+      position: relative;
+      z-index: 1;
+      white-space: pre-wrap;
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: #4f3941;
+      padding-right: 8px;
+    }
+
+    .letter-title {
+      margin: 0 0 16px;
+      color: #8d4366;
+      font-size: 1.8rem;
+    }
+
+    .close-btn {
+      position: sticky;
+      top: 0;
+      float: right;
+      margin-left: 12px;
+      border: none;
+      background: #ffe3ec;
+      color: #8d4366;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -120px;
+      width: 70px;
+      height: 86px;
+      border-radius: 50% 50% 48% 48%;
+      opacity: 0.95;
+      animation: floatUp linear forwards;
+      z-index: 1;
+    }
+
+    .balloon::before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: inherit;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      top: 84px;
+      left: 50%;
+      width: 2px;
+      height: 110px;
+      background: rgba(120, 120, 120, 0.45);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.95;
+      }
+      50% {
+        transform: translateY(-50vh) translateX(20px) rotate(4deg);
+      }
+      100% {
+        transform: translateY(-125vh) translateX(-25px) rotate(-6deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 28px 20px;
+      }
+
+      .letter {
+        padding: 26px 20px;
+      }
+
+      .letter-content {
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <div class="card">
-    <h1>🎂 Happy Birthday! 🎂</h1>
-    <p class="subtitle">Wishing you a day full of smiles</p>
-
-    <div class="button-panel">
-      <button id="balloonBtn">🎈 Balloons</button>
-      <button id="confettiBtn">🎊 Confetti</button>
-      <button id="cakeBtn">🍰 Cake</button>
-      <button id="musicBtn">🎵 Music</button>
-      <button id="messageBtn">💌 Surprise</button>
-    </div>
-
-    <div id="cake" class="cake hidden">🍰</div>
-    <div id="message" class="message hidden">
-      You are amazing. Have the best birthday ever 💖
+  <div class="container">
+    <div class="hero">
+      <h1>A Little Surprise</h1>
+      <p class="subtitle">
+        Press the button and watch the balloons rise. Then your letter will appear.
+      </p>
+      <button class="magic-button" id="openLetterBtn">Open My Letter</button>
     </div>
   </div>
 
-  <audio id="birthdaySong"
-    src="https://cdn.pixabay.com/audio/2022/03/15/audio_5fdf9d8e9e.mp3">
-  </audio>
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter">
+      <button class="close-btn" id="closeLetterBtn">Close</button>
+      <h2 class="letter-title">Your Letter</h2>
 
-  <script src="main.js"></script>
+      <!--
+        EDIT YOUR LETTER BELOW.
+        You can replace everything inside the div with your own message.
+        Keep the <br><br> tags if you want paragraph spacing,
+        or just paste plain text and it will still work.
+      -->
+      <div class="letter-content" id="letterText">Dear [Name],
+
+This is where your letter goes.
+
+You can write anything you want here — a sweet message, a birthday note, a surprise confession, or a heartfelt thank-you.
+
+Edit this text directly inside the HTML file so you have full freedom over the message.
+
+With love,
+[Your Name]</div>
+    </div>
+  </div>
+
+  <script>
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const closeLetterBtn = document.getElementById('closeLetterBtn');
+    const letterOverlay = document.getElementById('letterOverlay');
+
+    const balloonColors = [
+      '#ff6b9a', '#ff9f68', '#ffd166', '#7bd389', '#70a1ff', '#c77dff', '#ff8fab'
+    ];
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+
+      const size = 50 + Math.random() * 45;
+      balloon.style.width = size + 'px';
+      balloon.style.height = size * 1.2 + 'px';
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+      balloon.style.animationDuration = 4 + Math.random() * 4 + 's';
+      balloon.style.animationDelay = Math.random() * 0.8 + 's';
+
+      document.body.appendChild(balloon);
+
+      setTimeout(() => {
+        balloon.remove();
+      }, 9000);
+    }
+
+    function releaseBalloons(count = 22) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(createBalloon, i * 120);
+      }
+    }
+
+    openLetterBtn.addEventListener('click', () => {
+      releaseBalloons();
+      setTimeout(() => {
+        letterOverlay.classList.add('show');
+      }, 1200);
+    });
+
+    closeLetterBtn.addEventListener('click', () => {
+      letterOverlay.classList.remove('show');
+    });
+
+    letterOverlay.addEventListener('click', (event) => {
+      if (event.target === letterOverlay) {
+        letterOverlay.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
